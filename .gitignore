@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Environment (NEVER commit real paths/secrets)
+.env
+
+# Caches / intermediate
+_cache/
+*.npz
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,2 @@
+label,initial_balance,final_balance,total_return_pct,ann_return_pct,profit_factor,sharpe,sortino,calmar,max_dd_pct,win_rate_pct,avg_rr,max_single_win,max_single_loss,n_trades
+"Baseline 5: Static Breakout (only SL/TP, no half-exit)",10000.0,8757.351730533692,-12.426,-5.364,0.979,-0.078,-0.229,-0.104,-51.522,13.911,6.667,385.77,-61.51,1143

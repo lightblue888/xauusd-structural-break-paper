@@ -1,0 +1,2 @@
+label,initial_balance,final_balance,total_return_pct,ann_return_pct,profit_factor,sharpe,sortino,calmar,max_dd_pct,win_rate_pct,avg_rr,max_single_win,max_single_loss,n_trades,ret_95ci_low,ret_95ci_high,sharpe_95ci_low,sharpe_95ci_high,broke_pct
+Baseline 4: Random MC (mean),10000.0,7655.361117137358,-23.446383,,,-0.049058000000000004,,,-59.433412,15.121752,,,,1143,-100.4504,71.33757499999999,-1.65945,0.9402249999999998,9.8

@@ -1,0 +1,3 @@
+label,initial_balance,final_balance,total_return_pct,ann_return_pct,profit_factor,sharpe,sortino,calmar,max_dd_pct,win_rate_pct,avg_rr,max_single_win,max_single_loss,n_trades
+Python V10,10000.0,28318.84299999993,183.188,54.117,1.47,3.907,11.137,6.916,-7.825,45.932,6.667,674.46,-110.88,1143
+Python V11,10000.0,41163.185999999725,311.632,80.031,1.563,3.906,10.648,8.461,-9.458,45.932,6.667,2122.56,-360.58,1143

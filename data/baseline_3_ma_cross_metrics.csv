@@ -1,0 +1,2 @@
+label,initial_balance,final_balance,total_return_pct,ann_return_pct,profit_factor,sharpe,sortino,calmar,max_dd_pct,win_rate_pct,avg_rr,max_single_win,max_single_loss,n_trades
+Baseline 3: MA Cross + V11 sizing,10000.0,10944.531037946428,9.445,3.959,1.378,0.567,0.364,0.384,-10.319,45.0,2.0,656.52,-290.41,40

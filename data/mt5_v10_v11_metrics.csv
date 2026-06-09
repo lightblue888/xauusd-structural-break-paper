@@ -1,0 +1,3 @@
+label,initial_balance,final_balance,total_return_pct,ann_return_pct,profit_factor,sharpe,sortino,calmar,max_dd_pct,win_rate_pct,avg_rr,max_single_win,max_single_loss,n_trades
+"V10 (MT5, fixed ATR sizing)",10000.0,27849.34999999999,178.493,53.05,1.314,3.228,7.662,3.442,-15.414,37.683,6.611,1454.96,-293.8,1571
+"V11 (MT5, sqrt sizing)",10000.0,30827.829999999998,208.278,59.65,1.307,2.716,5.679,3.46,-17.238,37.683,6.611,1690.41,-256.66,1571
