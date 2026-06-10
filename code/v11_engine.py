@@ -241,7 +241,9 @@ def dynamic_multiplier(atr_ratio: float, trend: str,
 def run(use_dynamic_sizing: bool = True, log_progress: bool = True,
         warmup_months: int = 6,
         trade_window_start: str = None,
-        trade_window_end: str = None) -> pd.DataFrame:
+        trade_window_end: str = None,
+        tz_offset_hours: int = 0,
+        broker_tz: str = None) -> pd.DataFrame:
     """
     单一引擎双开关入口.
     返回: trades_df with cols [pos_id, side, open_time, open_price, lot, sl, tp,
@@ -257,6 +259,25 @@ def run(use_dynamic_sizing: bool = True, log_progress: bool = True,
     print(f"[engine] 数据窗口: warmup {warmup_start_dt} ~ {twin_start}, trade {twin_start} ~ {twin_end}", flush=True)
 
     dt, o, h, l, c = load_1m_arrays(start=warmup_start_dt, end=twin_end)
+    # 时区对齐: HistData 是 UTC, ECMarkets broker time = GMT+2/+3 (带欧洲夏令时)。
+    # 把 1m 时间戳搬到 broker time, 让 4H/D1 bar 边界跟 MT5 精确对齐 → 从设计上消除时区变量,
+    # Python vs MT5 的残差 gap 只剩 data vendor + tick 执行精度 (contribution (d) 的真正目标)。
+    # broker_tz: 真 DST 转换 (推荐 "Europe/Athens" = EET/EEST, 逐日精确); 优先于 tz_offset_hours。
+    if broker_tz:
+        ts = pd.DatetimeIndex(dt).tz_localize("UTC").tz_convert(broker_tz).tz_localize(None)
+        dt = ts.values.astype("datetime64[s]")
+        print(f"          [tz] 已转 broker 时间 {broker_tz} (EET/EEST 真 DST, UTC→broker wall-clock)", flush=True)
+        # HistData 交易窗口比 broker 宽 (周五尾盘跑到 23:56 UTC + 周日 17:00 UTC 早开),
+        # 平移后会落到 broker 周六/周日。真实 broker feed 零周末 bar, 故剔除周末 bar,
+        # 让 Python 控制组的交易时段跟 MT5 精确同口径 (同时区 + 同 5 天交易周)。
+        dow = ts.dayofweek.values            # Mon=0 .. Sun=6
+        wk = dow < 5                          # 只保留周一~周五 (broker 时间)
+        n_drop = int((~wk).sum())
+        dt, o, h, l, c = dt[wk], o[wk], h[wk], l[wk], c[wk]
+        print(f"          [tz] 剔除 broker 周末 bar {n_drop} 根 (周六+周日开盘前), 匹配 broker 5 天交易周", flush=True)
+    elif tz_offset_hours != 0:
+        dt = dt + np.timedelta64(int(tz_offset_hours) * 3600, "s")
+        print(f"          [tz] 已平移 1m 时间戳 +{tz_offset_hours}h (UTC→broker, 固定偏移)", flush=True)
     twin_start_dt64 = np.datetime64(twin_start)
     print(f"          {len(dt):,} 根 1m bars (含 warmup)", flush=True)
 

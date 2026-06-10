@@ -19,7 +19,7 @@ data/   Trade-level CSVs for V10/V11/V10_2x/V11_2x, sizing variants,
 ## Four contributions (reproducible from this repo)
 
 1. **Entry-signal alpha** — structural-break entry beats six baselines (Sharpe 2.6–3.1).
-2. **Asymmetric partial-exit** — a +1R half-exit with breakeven stop drives the majority of compounded return.
+2. **Asymmetric partial-exit (negative finding)** — a +1R half-exit with breakeven stop reshapes the outcome distribution (win rate 17%→38%, drawdown cut ~1/3) but institutionalizes the disposition effect; a faithful real-tick ablation shows no gain in any risk-adjusted measure (Sharpe/Sortino/Calmar all statistically unchanged).
 3. **Negative finding** — regime-conditional position sizing (sqrt-product, ATR-only, trend-only, Moreira–Muir volatility targeting) generates no Sharpe alpha; apparent gains are covert leverage.
 4. **Methodological finding** — backtest tick-resolution can reverse the directional conclusion about which sub-component generates alpha.
 

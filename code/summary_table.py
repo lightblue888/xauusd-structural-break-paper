@@ -19,9 +19,12 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _config import OUT_DIR, DOC_DIR
 
-OUT_MD    = DOC_DIR / "SUMMARY_TABLE.md"
-OUT_TEX   = DOC_DIR / "SUMMARY_TABLE.tex"
-OUT_CSV   = DOC_DIR / "SUMMARY_TABLE.csv"
+# 2026-06-10: 此表是 Python 1m 实现, 已降级 (DEPRECATED as primary, 论文 primary 用 MT5 SUMMARY_TABLE_mode2.md)。
+# 输出落到 Archived/ 而非 root, 避免重新生成污染主目录。
+_ARCH     = DOC_DIR / "Archived"
+OUT_MD    = _ARCH / "SUMMARY_TABLE.md"
+OUT_TEX   = _ARCH / "SUMMARY_TABLE.tex"
+OUT_CSV   = _ARCH / "SUMMARY_TABLE.csv"
 
 
 def load_all():
@@ -128,10 +131,10 @@ def to_markdown(df: pd.DataFrame) -> str:
     lines.append("结构突破入场显著优于全部 baseline (MT5 real-tick: V10 Sharpe 3.06 vs Buy&Hold 1.59 / MA Cross 0.57 / Random MC mean -0.05)。")
     lines.append("→ 价格结构突破信号本身携带 risk-adjusted alpha, MC 1000 placebo p<0.01。")
     lines.append("")
-    lines.append("**Contribution (b) — 不对称 +1R 半仓 + 保本止损的出场管理 alpha**:")
-    lines.append("剥离半仓 (Baseline 5) → 收益减 ~195pp, 策略基本失去盈利能力。")
-    lines.append("内部分解 (real-tick): 1M K 线过滤额外贡献 +8% Sharpe / +28% Calmar (V11 vs V11_FixedR)。")
-    lines.append("→ 出场管理是核心 alpha 载体。")
+    lines.append("**Contribution (b) — 不对称半仓 = 处置效应制度化, 重塑分布但无 risk-adjusted alpha (NEGATIVE)**:")
+    lines.append("MT5 忠实消融 (Baseline5 关半仓): V10(有半仓) +163%/Sharpe 3.06 vs B5(无半仓) +227%/2.71 — 去半仓收益反而更高。")
+    lines.append("半仓在 92% 赢单触发 / 0% 亏损单触发; 配对 block-bootstrap (V10−B5) ΔSharpe p=0.25 / ΔCalmar p=0.94 / ΔMaxDD p=0.13 全 n.s.; 唯一显著 = 胜率 +21pp (z=12.9, p<0.001, 分布维度非 alpha)。")
+    lines.append("→ 半仓重塑分布 (胜率↑/回撤↓) 却不产生 risk-adjusted alpha = 处置效应制度化 (Shefrin-Statman 1985)。")
     lines.append("")
     lines.append("**Contribution (c) — NEGATIVE FINDING: regime-conditional sizing 不产生 alpha**:")
     lines.append("没有任何 regime sizing 在 Sharpe 上打败 V10 baseline (3.06)。")
@@ -140,7 +143,7 @@ def to_markdown(df: pd.DataFrame) -> str:
     lines.append("")
     lines.append("**Contribution (d) — METHODOLOGY: 回测精度反转子组件结论**:")
     lines.append("mode 1 (插值 tick) 系统性高估 Sharpe 4-14%; 真 tick 子样本放大 2-3 倍。")
-    lines.append("K 线过滤在 mode 1 看似装饰 (2.72 约等于 2.79), 真 tick 下是真 alpha (2.61>2.41) — 结论反转。")
+    lines.append("K 线过滤在 mode 1 看似装饰 (2.72 约等于 2.79), 真 tick 下点估计转正 (2.61>2.41); DiD 反转单侧 p=0.06 边缘显著 — 方向稳健, 幅度待全覆盖判定。")
     lines.append("→ 倡导 real-tick 评估作为高频商品策略研究的方法论基线。")
     return "\n".join(lines)
 
@@ -189,6 +192,7 @@ def to_latex(df: pd.DataFrame) -> str:
 
 def main():
     df = load_all()
+    _ARCH.mkdir(exist_ok=True)
     df.to_csv(OUT_CSV, index=False, encoding="utf-8")
     OUT_MD.write_text(to_markdown(df), encoding="utf-8")
     OUT_TEX.write_text(to_latex(df), encoding="utf-8")

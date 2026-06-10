@@ -1,0 +1,3 @@
+label,initial_balance,final_balance,total_return_pct,ann_return_pct,profit_factor,sharpe,sortino,calmar,max_dd_pct,win_rate_pct,avg_rr,max_single_win,max_single_loss,n_trades
+Python V10 (broker),10000.0,31577.980999999938,215.78,61.253,1.544,4.56,11.658,7.485,-8.183,46.757,6.667,733.97,-120.38,1110
+Python V11 (broker),10000.0,41977.47199999991,319.775,81.502,1.574,4.319,9.74,8.827,-9.233,46.757,6.667,2459.79,-417.52,1110
