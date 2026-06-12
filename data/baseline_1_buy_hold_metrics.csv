@@ -1,2 +1,2 @@
 label,initial_balance,final_balance,total_return_pct,ann_return_pct,profit_factor,sharpe,sortino,calmar,max_dd_pct,win_rate_pct,avg_rr,max_single_win,max_single_loss,n_trades
-Baseline 1: Buy & Hold,10000.0,22074.967800013113,120.75,40.589,,1.593,2.097,2.289,-17.729,100.0,,12074.97,,1
+Baseline 1: Buy & Hold,10000.0,22049.70105541281,120.497,38.897,,1.555,2.272,1.765,-22.036,100.0,,12049.7,,1

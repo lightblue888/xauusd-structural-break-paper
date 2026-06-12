@@ -1,0 +1,4 @@
+window,train_best_atr_scale,train_best_trend_scale,train_sharpe,test_v11_recal_sharpe,test_v11_recal_return,test_v11_recal_n,test_v10_sharpe,test_v10_return,test_v10_n,recal_beats_v10
+2025H1,0.6,0.6,3.278,6.144,36.8,280,5.942,38.5,280,True
+2025H2,0.8,1.0,4.184,4.007,101.5,241,4.683,47.8,241,False
+2026H1,2.0,2.0,5.472,5.085,155.7,207,5.702,40.5,207,False

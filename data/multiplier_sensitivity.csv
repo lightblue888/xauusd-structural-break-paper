@@ -1,0 +1,11 @@
+label,family,perturbation,n,sharpe,ret,calmar,maxdd
+V10 baseline,---,---,1110,4.56,215.78,7.485,-8.183
+V11 baseline,---,deployed,1110,4.319,319.775,8.827,-9.233
+Map values = 0.8,Map values,0.8,1110,4.349,262.999,8.561,-8.278
+Map values = 1.2,Map values,1.2,1110,4.338,388.552,9.056,-10.304
+Rho breakpoints = 0.8,Rho breakpoints,0.8,1110,4.159,476.67,9.006,-11.892
+Rho breakpoints = 1.2,Rho breakpoints,1.2,1110,4.223,281.008,6.44,-11.544
+ATRh (>1.4 bucket) = 2.0,ATRh (>1.4 bucket),2.0,1110,4.316,299.373,8.385,-9.277
+ATRh (>1.4 bucket) = 3.0,ATRh (>1.4 bucket),3.0,1110,4.329,343.19,9.318,-9.191
+mix (mixed trend) = 2.4,mix (mixed trend),2.4,1110,4.396,294.475,8.843,-8.693
+mix (mixed trend) = 3.6,mix (mixed trend),3.6,1110,4.266,351.173,8.722,-9.977
